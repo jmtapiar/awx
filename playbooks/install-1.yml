@@ -1,0 +1,13 @@
+---
+- name: Instalar paquete
+  hosts: all
+  become: true
+  vars_prompt:
+  - name: package
+    prompt: Package name to install
+    private: no
+  tasks:
+  - name: Install
+    yum:
+      name: "{{ package }}"
+      state: "latest"

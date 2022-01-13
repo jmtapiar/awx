@@ -1,0 +1,15 @@
+---
+- name: Check users
+  hosts: ssh3
+  become: true
+
+  tasks:
+    - name: Ensure users are present
+      user:
+        name: "{{ item }}"
+        state: present
+      loop:
+         - root
+         - vagrant
+         - apache
+         - jmtapia

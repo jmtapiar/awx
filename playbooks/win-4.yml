@@ -1,0 +1,8 @@
+---
+- name: Detener o Levantar un Servicio
+  hosts: win1
+  tasks:
+  - name: Detener o Levantar OpenSShd
+    win_service:
+      name: OpenSShd
+      state: started

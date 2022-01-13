@@ -1,0 +1,27 @@
+---
+- name: Hardening servidor web
+  hosts: all
+  become: yes
+  tasks:
+  - name: Configure httpd.conf ServerSignature
+    ansible.builtin.lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      line: ServerSignature Off
+      create: yes
+  - name: Configure httpd.conf ServerTokens
+    ansible.builtin.lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      line: ServerTokens Prod
+      create: yes
+  - name: Configure httpd.conf TraceEnable
+    ansible.builtin.lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      line: TraceEnable off
+      create: yes
+    notify:
+        - restart_apache
+  handlers:
+    - name: restart_apache
+      service:
+        name: httpd
+        state: restarted

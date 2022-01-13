@@ -1,0 +1,7 @@
+---
+- name: Ejecutar remoto
+  hosts: win1
+  tasks:
+  - name: Ejecutar comando remoto
+    win_command: whoami
+    register: whoami_out

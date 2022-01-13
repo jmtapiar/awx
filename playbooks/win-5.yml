@@ -1,0 +1,17 @@
+---
+- name: Crear entradas regedit
+  hosts: win1
+  tasks:
+  - name: Crear directorio
+    win_regedit:
+      path: HKLM:\SOFTWARE\Ansible
+  - name: Crear entrada
+    win_regedit:
+      path: HKLM:\SOFTWARE\Ansible
+      name: Curso
+      data: Ansible2
+  - name: Eliminar entrada
+    win_regedit:
+      path: HKLM:\SOFTWARE\Ansible
+      name: Curso
+      state: absent

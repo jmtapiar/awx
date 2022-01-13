@@ -1,0 +1,13 @@
+---
+- name: Copiar archivos
+  hosts: win1
+  tasks:
+  - name: Create directory
+    win_file:
+      path: C:\Temp\
+      state: directory
+  - name: Copy
+    win_copy:
+      src: C:\Temp\prod_web.html
+      dest: C:\Temp\prod_web-2.html
+      remote_src: true

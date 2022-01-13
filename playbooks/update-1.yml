@@ -1,0 +1,11 @@
+---
+- name: Actualizar SO
+  hosts: all
+  become: true
+  tasks:
+  - name: Update
+    yum:
+      name: "*"
+      state: "latest"
+  - name: Reboot
+    reboot:

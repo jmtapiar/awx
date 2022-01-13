@@ -1,0 +1,14 @@
+---
+- name: Instalar servidor web
+  hosts: ssh3
+  become: yes
+  tasks:
+  - name: Software Install
+    yum:
+      name: httpd
+      state: latest
+  - name: Active service
+    service:
+      name: httpd
+      enabled: true
+      state: started
