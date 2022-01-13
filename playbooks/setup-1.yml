@@ -1,0 +1,23 @@
+---
+- name: Instalar servidor web
+  hosts: all
+  tasks:
+  - name: Download amazon jdk
+    get_url:
+      url: https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.tar.gz
+      dest: /tmp/amazon-corretto-11-x64-linux-jdk.tar.gz
+  - name: Extract amazon jdk
+    unarchive:
+      src: /tmp/amazon-corretto-11-x64-linux-jdk.tar.gz
+      dest: /opt/
+      remote_src: true
+  - name: Install wildfly
+    unarchive:
+      src: https://github.com/wildfly/wildfly/releases/download/26.0.0.Final/wildfly-26.0.0.Final.zip
+      dest: /opt/
+      remote_src: yes
+  - name: Set JAVA_HOME
+    lineinfile:
+        path: /opt/wildfly-26.0.0.Final/bin/standalone.conf
+        regexp: '^#JAVA_HOME="/opt/java/jdk"'
+        line: JAVA_HOME=/opt/amazon-corretto-11.0.13.8.1-linux-x64
